@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // parse incoming string or array data
 app.use(express.urlencoded({ extended: true }));
+
 // parse incoming JSON data
 app.use(express.json());
 
@@ -21,7 +22,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/index.html'));
 })
 
-
 //route to notes
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/notes.html'));
@@ -29,16 +29,14 @@ app.get('/notes', (req, res) => {
 
 // working route to db.json
 app.get('/api/notes', (req, res) => {
-    //console.log(db);
     res.json(db);
 });
 
+//route to create note in json file
 app.post('/api/notes', (req, res) => {
-    //console.log(db);
     //add the ID property
     const newNote = req.body
     newNote.id = uuid()
-    //console.log(newNote);
     db.push(req.body);
 
     fs.writeFile('db/db.json', JSON.stringify(db), function (err, data) {
@@ -57,18 +55,18 @@ app.post('/api/notes', (req, res) => {
 app.delete('/api/notes/:id', (req, res) => {
     const deletedNote = (req.params.id);
 
-    //filter over the databse object and return which item were going to ddelete 
+    //filter over the database object and return which item you want to ddelete 
     db = db.filter(function (obj) {
         return obj.id !== deletedNote;
     });
 
-    //we loop over db obj and splice out the deleted record 
+    //we loop over database object and splice out the deleted record 
     for (var i = 0; i < db.length; i++) {
         if (db.indexOf(deletedNote) !== -1) {
             db.splice(i, 1);
         }
     }
-    //we write to the database json obj our new values
+    //we write to the database json object our new values
     fs.writeFile('db/db.json', JSON.stringify(db), function (err, data) {
         if (err) {
             throw err
@@ -79,12 +77,13 @@ app.delete('/api/notes/:id', (req, res) => {
 }
 )
 
+// wildcard route
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 
-// Method to make our server listen. Chain the listen() method onto our server.
+// method to make our server listen. Chain the listen() method onto our server.
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
 });

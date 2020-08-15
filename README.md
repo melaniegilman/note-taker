@@ -25,5 +25,5 @@ This application is very simple and easy to use.  The user simply needs to click
 * Express
 * Heroku
 
-* Contributions 
+## Contributions 
 Melanie Gilman 
