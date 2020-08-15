@@ -8,14 +8,6 @@ const fs = require('fs');
 const { json } = require('body-parser');
 const uuid = require ('uuid/v1');
 
-// db = [
-//     {
-//         "title": "Test Title",
-//         "text": "Test text",
-//         "id": "test_id"
-//     }
-// ]
-
 app.use(express.static(path.join(__dirname, '/public')));
 
 // parse incoming string or array data
@@ -37,15 +29,11 @@ app.get('/notes', (req, res) => {
 // working route to db.json
 app.get('/api/notes', (req, res) => {
     console.log(db);
-    // reach into db
-    // return data as json
     res.json(db);
 });
 
 app.post('/api/notes', (req, res) => {
-
     console.log(db);
-
     //add the ID property
     const newNote = req.body
     newNote.id = uuid()
@@ -60,6 +48,22 @@ app.post('/api/notes', (req, res) => {
         }
     });
 });
+
+
+// should receive a query parameter containing the id of a note to delete. 
+// In order to delete a note, you'll need to read all notes from the db.json file, 
+// remove the note with the given id property, and then rewrite the notes to the db.json file.
+// app.delete('/api/notes/:id', (req, res) => {
+//     console.log(req.params);
+//     const deletedNote = (req.params.id);
+//     deletedNote.delete(req.params.id);
+// }
+// )
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+
 
 // Method to make our server listen. Chain the listen() method onto our server.
 app.listen(PORT, () => {
