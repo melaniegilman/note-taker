@@ -18,6 +18,13 @@ THEN I am presented with empty fields to enter a new note title and the note’s
 ## Description
 This application is very simple and easy to use.  The user simply needs to click the "Get Started" button on the home page, and then fill in a note by clicking in the input areas for "Note Title" and "Note Text".  If the user would like to delete a note, this is possible by clicking on the red trashcan icon. Notes persist when the page is refreshed.
 
+## Links
+* Heroku 
+https://shrouded-meadow-83003.herokuapp.com/
+* Github
+https://github.com/melaniegilman/note-taker
+
+
 ## Built With
 * HTML
 * CSS 
@@ -27,3 +34,4 @@ This application is very simple and easy to use.  The user simply needs to click
 
 ## Contributions 
 Melanie Gilman 
+
